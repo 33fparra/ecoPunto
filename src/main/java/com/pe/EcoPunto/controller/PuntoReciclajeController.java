@@ -1,25 +1,25 @@
 package com.pe.EcoPunto.controller;
 
-import com.pe.EcoPunto.entity.PuntoMaterial;
-import com.pe.EcoPunto.repository.PuntoMaterialRepository;
+import com.pe.EcoPunto.entity.PuntoReciclaje;
+import com.pe.EcoPunto.repository.PuntoReciclajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/rest/v1/puntoMaterial")
-public class PuntoMaterialController
+@RequestMapping("/rest/v1/puntoReciclaje")
+public class PuntoReciclajeController
 {
     @Autowired
-    private PuntoMaterialRepository puntoMaterialRepository;
+    private PuntoReciclajeRepository puntoReciclajeRepository;
 
     @GetMapping("listar")
-    public ResponseEntity<?> listarPuntosMateriales()
+    public ResponseEntity<?> listarPuntosReciclajes()
     {
         try
         {
-            return ResponseEntity.status(HttpStatus.OK).body(puntoMaterialRepository.findAll());
+            return ResponseEntity.status(HttpStatus.OK).body(puntoReciclajeRepository.findAll());
         }
         catch (Exception e)
         {
@@ -28,11 +28,11 @@ public class PuntoMaterialController
     }
 
     @GetMapping("listar/{id}")
-    public ResponseEntity<?> listarPuntoMaterial(@PathVariable("id") long id)
+    public ResponseEntity<?> listarPuntoReciclaje(@PathVariable("id") long id)
     {
         try
         {
-            return ResponseEntity.status(HttpStatus.OK).body(puntoMaterialRepository.findById(id).orElse(null));
+            return ResponseEntity.status(HttpStatus.OK).body(puntoReciclajeRepository.findById(id).orElse(null));
         }
         catch (Exception e)
         {
@@ -41,16 +41,16 @@ public class PuntoMaterialController
     }
 
     @PostMapping("guardar")
-    public ResponseEntity<?> guardarPuntoMaterial(@RequestBody PuntoMaterial puntoMaterial)
+    public ResponseEntity<?> guardarPuntoReciclaje(@RequestBody PuntoReciclaje puntoReciclaje)
     {
         try
         {
-            if (puntoMaterial == null || (puntoMaterial.getPuntoReciclajeId() != null && puntoMaterialRepository.existsById(puntoMaterial.getPuntoReciclajeId())))
+            if (puntoReciclaje == null || (puntoReciclaje.getId() != null && !puntoReciclajeRepository.existsById(puntoReciclaje.getId())))
             {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se puede guardar un Punto Material existente o no válido!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se puede guardar un Punto Reciclaje existente o no válido!");
             }
 
-            puntoMaterialRepository.save(puntoMaterial);
+            puntoReciclajeRepository.save(puntoReciclaje);
             return ResponseEntity.status(HttpStatus.OK).body("Se guardo correctamente!");
         }
         catch (Exception e)
@@ -60,16 +60,16 @@ public class PuntoMaterialController
     }
 
     @PutMapping("actualizar/{id}")
-    public ResponseEntity<?> actualizarMaterial(@RequestBody PuntoMaterial puntoMaterial, @PathVariable("id") long id)
+    public ResponseEntity<?> actualizarReciclaje(@RequestBody PuntoReciclaje puntoReciclaje, @PathVariable("id") long id)
     {
         try
         {
-            if (!puntoMaterialRepository.existsById(id))
+            if (!puntoReciclajeRepository.existsById(id))
             {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el punto material!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el punto reciclaje!");
             }
 
-            puntoMaterialRepository.save(puntoMaterial);
+            puntoReciclajeRepository.save(puntoReciclaje);
             return ResponseEntity.status(HttpStatus.OK).body("Se actualizo correctamente!");
         }
         catch (Exception e)
@@ -80,16 +80,16 @@ public class PuntoMaterialController
     }
 
     @DeleteMapping("eliminar/{id}")
-    public ResponseEntity<?> eliminarMaterial(@PathVariable("id") long id)
+    public ResponseEntity<?> eliminarReciclaje(@PathVariable("id") long id)
     {
         try
         {
-            if (!puntoMaterialRepository.existsById(id))
+            if (!puntoReciclajeRepository.existsById(id))
             {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el punto material!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el punto reciclaje!");
             }
 
-            puntoMaterialRepository.deleteById(id);
+            puntoReciclajeRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Se elimino correctamente!");
         }
         catch (Exception e)
