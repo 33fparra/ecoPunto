@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pe.EcoPunto.entity.roles;
 import com.pe.EcoPunto.entity.usuarios;
-import com.pe.EcoPunto.repository.rolesRepository;
+import com.pe.EcoPunto.repository.RolesRepository;
 import com.pe.EcoPunto.repository.usuariosRepository;
 
 @RestController
@@ -33,7 +33,7 @@ public class usuariosController {
     private usuariosRepository usuRepo;
 
     @Autowired
-    private rolesRepository rolRepo;
+    private RolesRepository rolRepo;
 
     @GetMapping("/listar/todo")
     public List<Map<String, Object>> ListarTodoUsuariosConRoles() {
@@ -200,11 +200,9 @@ public class usuariosController {
                 rol = rolOptional.get();
             } else {
                 Optional<roles> rolUsuario = rolRepo.findByNombre("Usuario");
-                if (rolUsuario.isPresent()){
+                if (rolUsuario.isPresent()) {
                     rol = rolUsuario.get();
-                }
-                else
-                {
+                } else {
                     rol = new roles("Usuario");
                     rolRepo.save(rol);
                 }

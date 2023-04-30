@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.pe.EcoPunto.entity.roles;
 
 @Repository
-public interface rolesRepository extends JpaRepository<roles, Long> {
+public interface RolesRepository extends JpaRepository<roles, Long> {
     Optional<roles> findByNombre(String nombre);
 
 }
