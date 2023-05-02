@@ -44,6 +44,8 @@ public class usuariosController {
             usuarioConRol.put("id", usuario.getId());
             usuarioConRol.put("nombre", usuario.getNombre());
             usuarioConRol.put("correoElectronico", usuario.getCorreoElectronico());
+            usuarioConRol.put("telefono", usuario.getTelefono());
+            usuarioConRol.put("direccion", usuario.getDireccion());
             usuarioConRol.put("rol", usuario.getRol().getNombre());
             listaUsuariosConRoles.add(usuarioConRol);
         }
@@ -121,6 +123,8 @@ public class usuariosController {
                 usuarioExistente.setNombre(usuario.getNombre());
                 usuarioExistente.setCorreoElectronico(usuario.getCorreoElectronico());
                 usuarioExistente.setContrasena(usuario.getContrasena());
+                usuarioExistente.setTelefono(usuario.getTelefono());
+                usuarioExistente.setDireccion(usuario.getDireccion());
                 usuarioExistente.setRol(validarRol.get());
 
                 // usuarios usuarioActualizado = usuRepo.save(usuarioExistente);
@@ -191,7 +195,7 @@ public class usuariosController {
         try {
             if (usuRepo.existsByCorreoElectronico(usuario.getCorreoElectronico())) {
                 msg.put("mensaje", "El correo electronico ya esta en uso");
-                return ResponseEntity.badRequest().body(msg);
+                return ResponseEntity.ok(msg);
             }
             // Verificar si el rol existe si no existe creara con el rol "Usuario"
             Optional<roles> rolOptional = rolRepo.findByNombre(usuario.getRol().getNombre());
@@ -209,10 +213,11 @@ public class usuariosController {
             }
 
             usuarios listusuario = new usuarios(usuario.getNombre(), usuario.getCorreoElectronico(),
-                    usuario.getContrasena(), rol);
+                    usuario.getContrasena(), usuario.getDireccion(), usuario.getTelefono(), rol);
             usuRepo.save(listusuario);
 
             msg.put("mensaje", "Usuario registrado correctamente");
+            System.out.println(msg);
             return ResponseEntity.ok(msg);
 
         } catch (Exception e) {

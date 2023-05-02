@@ -39,6 +39,12 @@ public class usuarios {
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
+    @Column(name = "telefono", nullable = false)
+    private String telefono;
+
+    @Column(name = "direccion", nullable = false)
+    private String direccion;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_id", nullable = false)
     private roles rol;
@@ -49,10 +55,12 @@ public class usuarios {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<PuntoMaterial> puntoMateriales;
 
-    public usuarios(String nombre, String correoElectronico, String contrasena, roles rol) {
+    public usuarios(String nombre, String correoElectronico, String contrasena,String telefono,String direccion, roles rol) {
         this.nombre = nombre;
         this.correoElectronico = correoElectronico;
         this.contrasena = contrasena;
+        this.telefono = telefono;
+        this.direccion = direccion;
         this.rol = rol;
     }
 
