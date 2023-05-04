@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 @Data
@@ -23,6 +25,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+//@JsonIgnoreProperties({ "puntosReciclaje", "puntoMateriales" })
 @Table(name = "usuarios")
 public class usuarios {
 
@@ -45,13 +48,16 @@ public class usuarios {
     @Column(name = "direccion", nullable = false)
     private String direccion;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rol_id", nullable = false)
+    @JoinColumn(name = "roles_id", nullable = false)
     private roles rol;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<PuntoReciclaje> puntosReciclaje;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<PuntoMaterial> puntoMateriales;
 

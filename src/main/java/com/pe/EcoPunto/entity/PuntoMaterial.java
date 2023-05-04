@@ -1,5 +1,6 @@
 package com.pe.EcoPunto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -21,10 +22,12 @@ public class PuntoMaterial
 
     private String nombrePuntoReciclaje;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private usuarios usuario;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "puntoMaterial")
     private List<materiales_reciclables> materialesReciclables;
 }
