@@ -174,11 +174,12 @@ public class usuariosController {
         Optional<usuarios> usuarioOptional = usuRepo.findByCorreoElectronico(correoElectronico);
         if (usuarioOptional.isPresent()) {
             usuarios usuario = usuarioOptional.get();
-            //System.out.println("------------");
-            //System.out.println(usuario);
-            //System.out.println("------------");
+            System.out.println("------------");
+            System.out.println(usuario);
+            System.out.println("------------");
             if (usuario.getContrasena().equals(contrasena)) {
-                msg.put("mensaje", "Bienvenido" + " " + usuario.getNombre());
+                msg.put("mensaje", "Bienvenido " + usuario.getRol().getNombre() + " : " + usuario.getNombre());
+                msg.put("tipUser", usuario.getRol().getNombre());
                 return ResponseEntity.ok(msg);
                 // return ResponseEntity.ok().build();
             }
