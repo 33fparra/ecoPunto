@@ -44,6 +44,7 @@ public class usuariosController {
             usuarioConRol.put("id", usuario.getId());
             usuarioConRol.put("nombre", usuario.getNombre());
             usuarioConRol.put("correoElectronico", usuario.getCorreoElectronico());
+            usuarioConRol.put("contrasena", usuario.getContrasena());
             usuarioConRol.put("telefono", usuario.getTelefono());
             usuarioConRol.put("direccion", usuario.getDireccion());
             usuarioConRol.put("rol", usuario.getRol().getNombre());
@@ -214,7 +215,7 @@ public class usuariosController {
             }
 
             usuarios listusuario = new usuarios(usuario.getNombre(), usuario.getCorreoElectronico(),
-                    usuario.getContrasena(), usuario.getDireccion(), usuario.getTelefono(), rol);
+                    usuario.getContrasena(),usuario.getTelefono(), usuario.getDireccion(),  rol);
             usuRepo.save(listusuario);
 
             msg.put("mensaje", "Usuario registrado correctamente");
