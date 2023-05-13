@@ -105,19 +105,23 @@ public class PuntoReciclajeController
     @DeleteMapping("eliminar/{id}")
     public ResponseEntity<?> eliminarReciclaje(@PathVariable("id") long id)
     {
+        Map<String, String> msg = new HashMap<>();
         try
         {
             if (!puntoReciclajeRepository.existsById(id))
             {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el punto reciclaje!");
+                msg.put("mensaje", "No existe el punto reciclaje");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
             }
 
             puntoReciclajeRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Se elimino correctamente!");
+            msg.put("mensaje", "Se elimino correctamente!");
+            return ResponseEntity.status(HttpStatus.OK).body(msg);
         }
         catch (Exception e)
         {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error al eliminar!");
+            msg.put("mensaje", "Ocurrió un Error, intenta de nuevo!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
         }
     }
 }

@@ -176,7 +176,7 @@ public class usuariosController {
         if (usuarioOptional.isPresent()) {
             usuarios usuario = usuarioOptional.get();
             System.out.println("------------");
-            System.out.println(usuario);
+            //System.out.println(usuario);
             System.out.println("------------");
             if (usuario.getContrasena().equals(contrasena)) {
                 msg.put("mensaje", "Bienvenido " + usuario.getRol().getNombre() + " : " + usuario.getNombre());
