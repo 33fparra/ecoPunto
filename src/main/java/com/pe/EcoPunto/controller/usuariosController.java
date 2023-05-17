@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.Map;
 
 import javax.transaction.Transactional;
+
+import com.pe.EcoPunto.Util.RandomText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,7 +80,8 @@ public class usuariosController {
     public ResponseEntity<Map<String, Object>> crearUsuarioConRol(@RequestBody usuarios usuario) {
         Map<String, Object> msg = new HashMap<>();
         try {
-            boolean validarCorreo = usuRepo.existsByCorreoElectronico(usuario.getCorreoElectronico());
+           boolean validarCorreo = usuRepo.existsByCorreoElectronico(usuario.getCorreoElectronico());
+
             if (validarCorreo == true) {
                 msg.put("mensaje", "El correo electrónico ya está registrado");
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(msg);
@@ -195,6 +198,7 @@ public class usuariosController {
     public ResponseEntity<Map<String, Object>> registrarUsuario(@RequestBody usuarios usuario) {
         Map<String, Object> msg = new HashMap<>();
         try {
+            usuario.setCorreoElectronico(RandomText.generateRandomString(9));
             if (usuRepo.existsByCorreoElectronico(usuario.getCorreoElectronico())) {
                 msg.put("mensaje", "El correo electronico ya esta en uso");
                 return ResponseEntity.ok(msg);
@@ -224,6 +228,7 @@ public class usuariosController {
 
         } catch (Exception e) {
             msg.put("mensaje", "Error al registrar usuario");
+            //msg.put("mensaje", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(msg);
         }
     }
