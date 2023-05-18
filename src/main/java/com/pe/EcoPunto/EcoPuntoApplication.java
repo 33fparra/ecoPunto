@@ -2,7 +2,6 @@ package com.pe.EcoPunto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 @SpringBootApplication
 public class EcoPuntoApplication {
 
