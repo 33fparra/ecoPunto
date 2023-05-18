@@ -50,7 +50,6 @@ public class PuntoReciclajeController
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error, por favor intente más tarde");
         }
     }
-
     @PostMapping("/guardar")
     public ResponseEntity<?> guardarPuntoReciclaje(@RequestBody PuntoReciclajeDTO puntoReciclaje)
     {

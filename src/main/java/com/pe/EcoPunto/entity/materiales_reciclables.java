@@ -1,5 +1,4 @@
 package com.pe.EcoPunto.entity;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
 @Data
 @Entity
 @AllArgsConstructor

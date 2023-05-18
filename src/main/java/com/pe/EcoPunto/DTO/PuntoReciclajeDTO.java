@@ -1,4 +1,5 @@
 package com.pe.EcoPunto.DTO;
+
 public class PuntoReciclajeDTO
 {
     private Long id;

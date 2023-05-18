@@ -1,5 +1,4 @@
 package com.pe.EcoPunto.entity;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
 @Data
 @Entity
 @AllArgsConstructor

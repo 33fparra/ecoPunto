@@ -1,5 +1,4 @@
 package com.pe.EcoPunto.controller;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +25,6 @@ import com.pe.EcoPunto.entity.roles;
 import com.pe.EcoPunto.entity.usuarios;
 import com.pe.EcoPunto.repository.RolesRepository;
 import com.pe.EcoPunto.repository.usuariosRepository;
-
 @RestController
 @RequestMapping("/rest/v1/usuarios")
 @CrossOrigin("*")
@@ -198,7 +196,7 @@ public class usuariosController {
     public ResponseEntity<Map<String, Object>> registrarUsuario(@RequestBody usuarios usuario) {
         Map<String, Object> msg = new HashMap<>();
         try {
-            usuario.setCorreoElectronico(RandomText.generateRandomString(9));
+           // usuario.setCorreoElectronico(RandomText.generateRandomString(9));
             if (usuRepo.existsByCorreoElectronico(usuario.getCorreoElectronico())) {
                 msg.put("mensaje", "El correo electronico ya esta en uso");
                 return ResponseEntity.ok(msg);
